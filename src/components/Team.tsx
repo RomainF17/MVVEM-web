@@ -21,7 +21,7 @@ export const Team = () => {
     
     try {
       // Remplacez 'YOUR_FORM_ID' par votre ID Formspree (voir instructions)
-      const response = await fetch("https://formspree.io/f/mqaklzbb", {
+      const response = await fetch("https://formspree.io/f/xqeezyne", {
         method: "POST",
         body: formData,
         headers: {
