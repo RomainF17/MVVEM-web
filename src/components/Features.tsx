@@ -8,7 +8,8 @@ const features = [
     description: "Un fil d'actualité local pour rester connecté aux initiatives vertes de sa commune. Retrouvez les dispositifs, réglementations, astuces et aménagements pour végétaliser de manière responsable.",
     icon: Newspaper,
     color: "bg-emerald-100 text-emerald-700",
-    points: ["Fil d'actualité local", "Dossiers thématiques", "Astuces éco-responsables"]
+    points: ["Fil d'actualité local", "Dossiers thématiques", "Astuces éco-responsables"],
+    image: "/images/feature-informer.png"
   },
   {
     id: "echanger",
@@ -16,7 +17,8 @@ const features = [
     description: "Chaque membre peut proposer une initiative verte éphémère ou durable. Créez des murs floraux, lancez des défis et partagez vos réussites avec la communauté.",
     icon: Sprout,
     color: "bg-lime-100 text-lime-700",
-    points: ["Création d'initiatives", "Participation aux événements", "Partage communautaire"]
+    points: ["Création d'initiatives", "Participation aux événements", "Partage communautaire"],
+    image: "/images/feature-echanger.png"
   },
   {
     id: "carte",
@@ -24,7 +26,8 @@ const features = [
     description: "Une carte interactive répertoriant toutes les initiatives de végétalisation, ateliers, parcs, jardins partagés et acteurs locaux du développement durable.",
     icon: Map,
     color: "bg-blue-100 text-blue-700",
-    points: ["Carte interactive", "Filtres par catégorie", "Découverte locale"]
+    points: ["Carte interactive", "Filtres par catégorie", "Découverte locale"],
+    image: "/images/feature-carte.png"
   },
   {
     id: "soutenir",
@@ -32,7 +35,8 @@ const features = [
     description: "Un espace de financement participatif pour donner vie aux projets verts innovants nécessitant un apport matériel ou financier plus conséquent.",
     icon: HeartHandshake,
     color: "bg-amber-100 text-amber-700",
-    points: ["Crowdfunding local", "Suivi de projet", "Transparence"]
+    points: ["Crowdfunding local", "Suivi de projet", "Transparence"],
+    image: "/images/feature-financer.png"
   }
 ];
 
@@ -77,49 +81,32 @@ export const Features = () => {
                     </li>
                   ))}
                 </ul>
-                <button className="text-primary font-bold flex items-center gap-2 hover:gap-4 transition-all mt-4 group">
-                  En savoir plus <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </button>
               </div>
 
-              {/* Visual/Phone Placeholder */}
+              {/* Visual/Phone Mockup */}
               <div className="flex-1 w-full flex justify-center">
-                <div className="relative w-[300px] h-[600px] bg-secondary rounded-[3rem] border-8 border-secondary shadow-2xl overflow-hidden">
+                <div className="relative w-[300px] h-[600px] bg-secondary rounded-[3rem] border-8 border-secondary shadow-2xl overflow-hidden ring-4 ring-secondary/20">
                   {/* Status Bar */}
                   <div className="absolute top-0 w-full h-8 bg-secondary z-20 flex justify-between px-6 items-center">
                     <div className="w-12 h-4 bg-black/20 rounded-full mx-auto" />
                   </div>
                   
-                  {/* Screen Content Simulation */}
-                  <div className="w-full h-full bg-background pt-12 px-4 pb-8 flex flex-col relative overflow-hidden">
-                    {/* Header */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="w-8 h-8 rounded-full bg-secondary/10" />
-                      <div className="text-center">
-                        <div className="text-xs text-secondary/50 uppercase font-bold">Ma Ville Verte</div>
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-secondary/10" />
-                    </div>
-
-                    {/* Dynamic Content based on feature */}
-                    <div className="flex-1 space-y-4 overflow-hidden relative">
-                       {/* Abstract representations of UI elements */}
-                       <div className="w-full h-40 bg-white rounded-2xl shadow-sm p-4 mb-4">
-                          <div className="w-1/2 h-4 bg-gray-100 rounded mb-2" />
-                          <div className="w-full h-20 bg-emerald-50 rounded-lg mb-2" />
-                       </div>
-                       <div className="w-full h-32 bg-white rounded-2xl shadow-sm p-4 flex gap-4">
-                          <div className="w-20 h-20 bg-gray-100 rounded-lg shrink-0" />
-                          <div className="flex-1">
-                            <div className="w-3/4 h-4 bg-gray-100 rounded mb-2" />
-                            <div className="w-1/2 h-3 bg-gray-50 rounded" />
-                          </div>
-                       </div>
-                       
-                       {/* Floating Action Button */}
-                       <div className="absolute bottom-4 right-4 w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center">
-                         <div className="w-6 h-6 text-white text-xl">+</div>
-                       </div>
+                  {/* Screen Content - Image */}
+                  <div className="w-full h-full bg-background pt-8 pb-8 flex flex-col relative overflow-hidden">
+                    <img 
+                      src={feature.image} 
+                      alt={`Interface ${feature.title}`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback si l'image n'existe pas encore
+                        e.currentTarget.src = "https://images.unsplash.com/photo-1512428559087-560fa5ce7d5b?auto=format&fit=crop&q=80&w=600&h=1200";
+                        e.currentTarget.className = "w-full h-full object-cover opacity-50 grayscale";
+                      }}
+                    />
+                    
+                    {/* Overlay si pas d'image (texte d'aide) */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                       <span className="sr-only">Image de l'application</span>
                     </div>
                   </div>
                 </div>

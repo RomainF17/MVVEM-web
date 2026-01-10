@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Leaf } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export const Hero = () => {
   return (
@@ -56,44 +56,45 @@ export const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative hidden md:block"
+          className="relative hidden md:flex justify-center"
         >
-          <div className="relative z-10 aspect-[4/5] max-w-md mx-auto">
-             {/* Abstract City Representation */}
-             <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-primary/10 rounded-[3rem] backdrop-blur-sm border border-white/50 shadow-2xl overflow-hidden">
-               {/* Decorative city elements */}
-               <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-primary/20 to-transparent"></div>
-               
-               {/* Main visual - can be replaced with app screenshot */}
-               <div className="absolute inset-4 rounded-[2.5rem] bg-white shadow-inner overflow-hidden flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1518005020951-ecc8e5213891?q=80&w=2969&auto=format&fit=crop')] bg-cover">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-8 text-white">
-                    <Leaf className="w-8 h-8 mb-4 text-primary" />
-                    <h3 className="text-2xl font-bold mb-2">Ma Ville Verte</h3>
-                    <p className="text-white/80 text-sm">Découvrez les initiatives autour de vous.</p>
-                  </div>
+           {/* Phone Mockup Container */}
+           <div className="relative w-[320px] h-[640px] bg-secondary rounded-[3rem] border-8 border-secondary shadow-2xl overflow-hidden ring-4 ring-secondary/10 rotate-[-5deg] hover:rotate-0 transition-transform duration-500">
+              {/* Dynamic Image */}
+              <img 
+                src="/images/hero-app.png" 
+                alt="Ma Ville Verte App"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                   // Fallback visual if image missing
+                   e.currentTarget.style.display = 'none';
+                   e.currentTarget.parentElement?.classList.add('bg-gradient-to-br', 'from-primary/20', 'to-blue-100');
+                }}
+              />
+              
+              {/* Fallback Content (visible only if image fails to load) */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 -z-10">
+                 <p className="text-secondary/50 font-medium">Capture d'écran de l'accueil ici</p>
+                 <p className="text-xs text-secondary/30 mt-2">/images/hero-app.png</p>
+              </div>
+           </div>
+
+           {/* Decorative Elements */}
+           <motion.div 
+             animate={{ y: [0, -15, 0] }}
+             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+             className="absolute top-1/4 -right-4 bg-white p-4 rounded-2xl shadow-xl max-w-[180px] z-20"
+           >
+             <div className="flex items-center gap-3">
+               <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                 <span className="text-xl">🌿</span>
+               </div>
+               <div>
+                 <p className="text-xs text-gray-500">Nouvelle action</p>
+                 <p className="font-bold text-secondary text-sm">Mur végétal créé !</p>
                </div>
              </div>
-
-             {/* Floating cards */}
-             <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -right-8 top-20 bg-white p-4 rounded-2xl shadow-xl max-w-[200px]"
-             >
-               <div className="flex items-center gap-3 mb-2">
-                 <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600">
-                   <Leaf size={16} />
-                 </div>
-                 <div>
-                   <div className="text-xs text-gray-500">Nouvelle initiative</div>
-                   <div className="font-bold text-sm text-secondary">Mur Végétal</div>
-                 </div>
-               </div>
-               <div className="h-1 w-full bg-gray-100 rounded-full overflow-hidden">
-                 <div className="h-full w-3/4 bg-primary"></div>
-               </div>
-             </motion.div>
-          </div>
+           </motion.div>
         </motion.div>
       </div>
     </section>
