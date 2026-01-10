@@ -5,38 +5,67 @@ import { PhoneMockup } from './PhoneMockup';
 const features = [
   {
     id: "informer",
-    title: "Informer & Sensibiliser",
-    description: "Un fil d'actualité local pour rester connecté aux initiatives vertes de sa commune. Retrouvez les dispositifs, réglementations, astuces et aménagements pour végétaliser de manière responsable.",
+    title: "Informer",
+    description: [
+      "La page Infos permet d’informer l’utilisateur de l’actualité verte de sa commune et de le sensibiliser à la nature et au respect des pratiques de développement durable.",
+      "Un fil d’actualité affiche l’initiative et l’actualité se déroulant près de chez vous.",
+      "Sont classés dans nos grandes thématiques les dispositifs et réglementations mis en place par la commune, les astuces et aménagements permettant de végétaliser son environnement de manière responsable, ou encore de nombreux dossiers sur votre ville, ses ressources et infrastructures vertes.",
+    ],
     icon: Newspaper,
     color: "bg-emerald-100 text-emerald-700",
-    points: ["Fil d'actualité local", "Dossiers thématiques", "Astuces éco-responsables"],
+    points: [
+      "Fil d’actualité près de chez vous",
+      "Dossiers & thématiques",
+      "Dispositifs & réglementations",
+      "Astuces & aménagements responsables",
+    ],
     image: "/images/feature-informer.PNG"
   },
   {
     id: "echanger",
-    title: "Échanger & Proposer",
-    description: "Chaque membre peut proposer une initiative verte éphémère ou durable. Créez des murs floraux, lancez des défis et partagez vos réussites avec la communauté.",
+    title: "Échanger & proposer",
+    description: [
+      "Chaque membre de la communauté pourra créer et proposer une initiative verte qui pourra se dérouler dans sa ville à un temps donné.",
+      "Celle-ci pourra être vue par tous les utilisateurs de l’application qui pourront faire le choix d’y participer, de la suivre et/ou de la partager.",
+    ],
     icon: Sprout,
     color: "bg-lime-100 text-lime-700",
-    points: ["Création d'initiatives", "Participation aux événements", "Partage communautaire"],
+    points: [
+      "Créer une initiative verte",
+      "Participer, suivre, partager",
+      "Rencontrer & fédérer les voisins",
+    ],
     image: "/images/feature-echanger.PNG"
   },
   {
     id: "carte",
     title: "Géolocalisation des actions",
-    description: "Une carte interactive répertoriant toutes les initiatives de végétalisation, ateliers, parcs, jardins partagés et acteurs locaux du développement durable.",
+    description: [
+      "Sur la carte sont répertoriés : les initiatives de végétalisation, les ateliers de sensibilisation à la nature, les parcs et jardins, les jardineries et fleuristes.",
+      "Ainsi que tous les acteurs et dispositifs verts (fermes pédagogiques, jardins partagés, producteurs locaux biologiques, …).",
+    ],
     icon: Map,
     color: "bg-blue-100 text-blue-700",
-    points: ["Carte interactive", "Filtres par catégorie", "Découverte locale"],
+    points: [
+      "Carte interactive",
+      "Initiatives, ateliers, parcs & jardins",
+      "Acteurs & dispositifs verts",
+    ],
     image: "/images/feature-carte.png"
   },
   {
     id: "soutenir",
-    title: "Soutenir & Financer",
-    description: "Un espace de financement participatif pour donner vie aux projets verts innovants nécessitant un apport matériel ou financier plus conséquent.",
+    title: "Soutenir",
+    description: [
+      "L’onglet Financement participatif permet à des membres de la communauté de proposer et/ou soutenir des projets verts innovants nécessitant un apport financier et matériel plus important pour sa mise en place.",
+    ],
     icon: HeartHandshake,
     color: "bg-amber-100 text-amber-700",
-    points: ["Crowdfunding local", "Suivi de projet", "Transparence"],
+    points: [
+      "Financement participatif communautaire",
+      "Soutenir des projets verts innovants",
+      "Suivi simple & transparent",
+    ],
     image: "/images/feature-financer.PNG"
   }
 ];
@@ -71,9 +100,11 @@ export const Features = () => {
                   <feature.icon className="w-8 h-8" />
                 </div>
                 <h3 className="text-3xl font-display font-bold text-secondary">{feature.title}</h3>
-                <p className="text-lg text-secondary/70 leading-relaxed">
-                  {feature.description}
-                </p>
+                <div className="space-y-4 text-lg text-secondary/70 leading-relaxed">
+                  {feature.description.map((p: string, idx: number) => (
+                    <p key={idx}>{p}</p>
+                  ))}
+                </div>
                 <ul className="space-y-3">
                   {feature.points.map((point, i) => (
                     <li key={i} className="flex items-center gap-3 text-secondary font-medium">
