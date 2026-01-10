@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 
 const team = [
-  { name: "Audrey", role: "Co-fondatrice", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200&h=200" },
-  { name: "Jacky", role: "Co-fondateur", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200" },
-  { name: "Maxime", role: "Co-fondateur", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200" },
-  { name: "Romain", role: "Co-fondateur", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200" },
+  { name: "Audrey", role: "Co-fondatrice" },
+  { name: "Jacky", role: "Co-fondateur" },
+  { name: "Maxime", role: "Co-fondateur" },
+  { name: "Romain", role: "Co-fondateur" },
 ];
 
 export const Team = () => {
@@ -35,12 +35,8 @@ export const Team = () => {
               className="text-center group"
             >
               <div className="relative mb-4 inline-block">
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto relative z-10">
-                  <img 
-                    src={member.img} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                <div className="w-32 h-32 rounded-full bg-secondary/5 flex items-center justify-center border-4 border-white shadow-lg mx-auto relative z-10 group-hover:bg-primary/20 transition-colors duration-300">
+                   <span className="text-4xl font-display font-bold text-secondary/30 group-hover:text-secondary/60 transition-colors">{member.name[0]}</span>
                 </div>
                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 z-0"></div>
               </div>
@@ -61,13 +57,16 @@ export const Team = () => {
             <p className="text-lg text-secondary/70 mb-8 max-w-2xl mx-auto">
               Rejoignez la communauté et participez dès aujourd'hui à la construction d'un avenir plus vert.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-primary text-secondary px-8 py-3 rounded-full font-bold text-lg hover:bg-primary/90 hover:shadow-lg transition-all">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button className="bg-primary text-secondary px-8 py-3 rounded-full font-bold text-lg hover:bg-primary/90 hover:shadow-lg transition-all w-full sm:w-auto">
                 Télécharger l'application
               </button>
-              <button className="bg-secondary text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-secondary/90 transition-all">
+              <a 
+                href="mailto:romain.fargier.l@gmail.com"
+                className="bg-secondary text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-secondary/90 transition-all w-full sm:w-auto inline-flex justify-center items-center"
+              >
                 Nous contacter
-              </button>
+              </a>
             </div>
           </div>
           
