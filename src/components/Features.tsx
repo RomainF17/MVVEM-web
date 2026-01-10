@@ -92,11 +92,11 @@ export const Features = () => {
                   </div>
                   
                   {/* Screen Content - Image */}
-                  <div className="w-full h-full bg-background pt-8 pb-8 flex flex-col relative overflow-hidden">
+                  <div className="w-full h-full bg-white pt-8 flex items-center justify-center relative overflow-hidden">
                     <img 
                       src={feature.image} 
                       alt={`Interface ${feature.title}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       onError={(e) => {
                         // Fallback si l'image n'existe pas encore
                         e.currentTarget.src = "https://images.unsplash.com/photo-1512428559087-560fa5ce7d5b?auto=format&fit=crop&q=80&w=600&h=1200";

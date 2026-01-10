@@ -58,43 +58,33 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative hidden md:flex justify-center"
         >
-           {/* Phone Mockup Container */}
-           <div className="relative w-[320px] h-[640px] bg-secondary rounded-[3rem] border-8 border-secondary shadow-2xl overflow-hidden ring-4 ring-secondary/10 rotate-[-5deg] hover:rotate-0 transition-transform duration-500">
-              {/* Dynamic Image */}
-              <img 
-                src="/images/hero-app.PNG" 
-                alt="Ma Ville Verte App"
-                className="w-full h-full object-cover"
-                onError={(e) => {
+           {/* Phone (static, no rotation/hover) */}
+           <div className="relative w-[320px] h-[640px] bg-secondary rounded-[3rem] border-8 border-secondary shadow-2xl overflow-hidden ring-4 ring-secondary/10">
+             {/* Status Bar */}
+             <div className="absolute top-0 w-full h-8 bg-secondary z-20 flex justify-between px-6 items-center">
+               <div className="w-12 h-4 bg-black/20 rounded-full mx-auto" />
+             </div>
+
+             {/* Screen Content - Image */}
+             <div className="w-full h-full bg-white pt-8 flex items-center justify-center">
+               <img
+                 src="/images/hero-app.PNG"
+                 alt="Ma Ville Verte App"
+                 className="w-full h-full object-contain"
+                 onError={(e) => {
                    // Fallback visual if image missing
                    e.currentTarget.style.display = 'none';
-                   e.currentTarget.parentElement?.classList.add('bg-gradient-to-br', 'from-primary/20', 'to-blue-100');
-                }}
-              />
-              
-              {/* Fallback Content (visible only if image fails to load) */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 -z-10">
-                 <p className="text-secondary/50 font-medium">Capture d'écran de l'accueil ici</p>
-                 <p className="text-xs text-secondary/30 mt-2">/images/hero-app.png</p>
-              </div>
-           </div>
+                   e.currentTarget.parentElement?.classList.add('bg-gradient-to-br', 'from-primary/10', 'to-blue-100/40');
+                 }}
+               />
 
-           {/* Decorative Elements */}
-           <motion.div 
-             animate={{ y: [0, -15, 0] }}
-             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-             className="absolute top-1/4 -right-4 bg-white p-4 rounded-2xl shadow-xl max-w-[180px] z-20"
-           >
-             <div className="flex items-center gap-3">
-               <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
-                 <span className="text-xl">🌿</span>
-               </div>
-               <div>
-                 <p className="text-xs text-gray-500">Nouvelle action</p>
-                 <p className="font-bold text-secondary text-sm">Mur végétal créé !</p>
+               {/* Fallback Content (visible only if image fails to load) */}
+               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 -z-10">
+                 <p className="text-secondary/50 font-medium">Capture d'écran de l'accueil ici</p>
+                 <p className="text-xs text-secondary/30 mt-2">/images/hero-app.PNG</p>
                </div>
              </div>
-           </motion.div>
+           </div>
         </motion.div>
       </div>
     </section>
