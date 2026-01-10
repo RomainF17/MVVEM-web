@@ -66,17 +66,32 @@ export const Hero = () => {
              </div>
 
              {/* Screen Content - Image */}
-             <div className="w-full h-full bg-white pt-8 flex items-center justify-center">
+             <div className="w-full h-full bg-white pt-8 relative overflow-hidden">
+               {/* Background blur to avoid white side bands */}
                <img
                  src="/images/hero-app.PNG"
-                 alt="Ma Ville Verte App"
-                 className="w-full h-full object-contain"
-                 onError={(e) => {
-                   // Fallback visual if image missing
-                   e.currentTarget.style.display = 'none';
-                   e.currentTarget.parentElement?.classList.add('bg-gradient-to-br', 'from-primary/10', 'to-blue-100/40');
-                 }}
+                 alt=""
+                 aria-hidden="true"
+                 className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-30"
                />
+
+               {/* Foreground screenshot (keeps full image) */}
+               <div className="relative z-10 w-full h-full flex items-center justify-center">
+                 <img
+                   src="/images/hero-app.PNG"
+                   alt="Ma Ville Verte App"
+                   className="w-full h-full object-contain"
+                   onError={(e) => {
+                     // Fallback visual if image missing
+                     e.currentTarget.style.display = 'none';
+                     e.currentTarget.parentElement?.parentElement?.classList.add(
+                       'bg-gradient-to-br',
+                       'from-primary/10',
+                       'to-blue-100/40',
+                     );
+                   }}
+                 />
+               </div>
 
                {/* Fallback Content (visible only if image fails to load) */}
                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 -z-10">
