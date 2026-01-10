@@ -29,8 +29,8 @@ export function PhoneMockup({ src, alt, className }: PhoneMockupProps) {
               loading="lazy"
             />
 
-            {/* Dynamic Island */}
-            <div className="pointer-events-none absolute left-1/2 top-[10px] h-[28px] w-[120px] -translate-x-1/2 rounded-full bg-black/95 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.8)]" />
+            {/* Dynamic Island (smaller on mobile, unchanged on desktop) */}
+            <div className="pointer-events-none absolute left-1/2 top-[10px] h-[22px] w-[92px] -translate-x-1/2 rounded-full bg-black/95 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.8)] md:h-[28px] md:w-[120px]" />
 
             {/* Screen glass */}
             <div className="pointer-events-none absolute inset-0 ring-1 ring-white/10" />

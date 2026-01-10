@@ -96,10 +96,23 @@ export const Features = () => {
             >
               {/* Text Content */}
               <div className="flex-1 space-y-6">
-                <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-6`}>
+                {/* Mobile header (badge style) */}
+                <div className="md:hidden">
+                  <div className={`inline-flex items-center gap-3 rounded-full px-5 py-2.5 ${feature.color} shadow-sm`}>
+                    <feature.icon className="w-5 h-5" />
+                    <span className="font-display font-bold tracking-tight text-lg leading-none">
+                      {feature.title}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Desktop header (unchanged layout) */}
+                <div className={`hidden md:flex w-16 h-16 rounded-2xl ${feature.color} items-center justify-center mb-6`}>
                   <feature.icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-3xl font-display font-bold text-secondary">{feature.title}</h3>
+                <h3 className="hidden md:block text-3xl font-display font-bold text-secondary">
+                  {feature.title}
+                </h3>
                 <div className="space-y-4 text-lg text-secondary/70 leading-relaxed">
                   {feature.description.map((p: string, idx: number) => (
                     <p key={idx}>{p}</p>
