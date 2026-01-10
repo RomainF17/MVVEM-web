@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Map, Newspaper, Sprout, HeartHandshake, ArrowRight } from 'lucide-react';
+import { Map, Newspaper, Sprout, HeartHandshake } from 'lucide-react';
 
 const features = [
   {
@@ -27,7 +27,7 @@ const features = [
     icon: Map,
     color: "bg-blue-100 text-blue-700",
     points: ["Carte interactive", "Filtres par catégorie", "Découverte locale"],
-    image: "/images/feature-carte.PNG"
+    image: "/images/feature-carte.png"
   },
   {
     id: "soutenir",
