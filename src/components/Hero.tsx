@@ -4,7 +4,7 @@ import { PhoneMockup } from './PhoneMockup';
 
 export const Hero = () => {
   return (
-    <section className="pt-32 pb-20 px-6 relative overflow-hidden min-h-screen flex items-center">
+    <section className="pt-32 pb-20 px-6 relative overflow-hidden min-h-screen flex items-start md:items-center">
       {/* Background blobs */}
       <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -z-10 animate-pulse"></div>
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-100/40 rounded-full blur-[80px] -z-10"></div>
@@ -50,6 +50,23 @@ export const Hero = () => {
               ))}
             </div>
             <p>Rejoint par +2000 citoyens</p>
+          </div>
+
+          {/* Mobile: show the hero phone below CTAs (desktop unchanged) */}
+          <div className="md:hidden mt-10 flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="w-[260px] max-w-[85vw]"
+            >
+              <PhoneMockup
+                src="/images/hero-app.PNG"
+                alt="Aperçu de l'application Ma Ville Verte et Moi"
+                className="w-full"
+              />
+            </motion.div>
           </div>
         </motion.div>
 
