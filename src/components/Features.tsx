@@ -107,12 +107,14 @@ export const Features = () => {
                 </div>
 
                 {/* Desktop header (unchanged layout) */}
-                <div className={`hidden md:flex w-16 h-16 rounded-2xl ${feature.color} items-center justify-center mb-6`}>
-                  <feature.icon className="w-8 h-8" />
+                <div className="hidden md:flex items-center gap-4 mb-6">
+                  <div className={`inline-flex items-center gap-3 rounded-full px-6 py-3 ${feature.color} shadow-sm`}>
+                    <feature.icon className="w-6 h-6" />
+                    <span className="font-display font-bold tracking-tight text-2xl leading-none">
+                      {feature.title}
+                    </span>
+                  </div>
                 </div>
-                <h3 className="hidden md:block text-3xl font-display font-bold text-secondary">
-                  {feature.title}
-                </h3>
                 <div className="space-y-4 text-lg text-secondary/70 leading-relaxed">
                   {feature.description.map((p: string, idx: number) => (
                     <p key={idx}>{p}</p>
