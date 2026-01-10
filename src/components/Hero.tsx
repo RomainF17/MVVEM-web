@@ -62,7 +62,7 @@ export const Hero = () => {
            <div className="relative w-[320px] h-[640px] bg-secondary rounded-[3rem] border-8 border-secondary shadow-2xl overflow-hidden ring-4 ring-secondary/10 rotate-[-5deg] hover:rotate-0 transition-transform duration-500">
               {/* Dynamic Image */}
               <img 
-                src="/images/hero-app.png" 
+                src="/images/hero-app.PNG" 
                 alt="Ma Ville Verte App"
                 className="w-full h-full object-cover"
                 onError={(e) => {

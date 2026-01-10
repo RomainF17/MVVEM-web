@@ -9,7 +9,7 @@ const features = [
     icon: Newspaper,
     color: "bg-emerald-100 text-emerald-700",
     points: ["Fil d'actualité local", "Dossiers thématiques", "Astuces éco-responsables"],
-    image: "/images/feature-informer.png"
+    image: "/images/feature-informer.PNG"
   },
   {
     id: "echanger",
@@ -18,7 +18,7 @@ const features = [
     icon: Sprout,
     color: "bg-lime-100 text-lime-700",
     points: ["Création d'initiatives", "Participation aux événements", "Partage communautaire"],
-    image: "/images/feature-echanger.png"
+    image: "/images/feature-echanger.PNG"
   },
   {
     id: "carte",
@@ -36,7 +36,7 @@ const features = [
     icon: HeartHandshake,
     color: "bg-amber-100 text-amber-700",
     points: ["Crowdfunding local", "Suivi de projet", "Transparence"],
-    image: "/images/feature-financer.png"
+    image: "/images/feature-financer.PNG"
   }
 ];
 
