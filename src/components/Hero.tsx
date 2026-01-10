@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { PhoneMockup } from './PhoneMockup';
 
 export const Hero = () => {
   return (
@@ -58,48 +59,11 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative hidden md:flex justify-center"
         >
-           {/* Phone (static, no rotation/hover) */}
-           <div className="relative w-[320px] h-[640px] bg-secondary rounded-[3rem] border-8 border-secondary shadow-2xl overflow-hidden ring-4 ring-secondary/10">
-             {/* Status Bar */}
-             <div className="absolute top-0 w-full h-8 bg-secondary z-20 flex justify-between px-6 items-center">
-               <div className="w-12 h-4 bg-black/20 rounded-full mx-auto" />
-             </div>
-
-             {/* Screen Content - Image */}
-             <div className="w-full h-full bg-white pt-8 relative overflow-hidden">
-               {/* Background blur to avoid white side bands */}
-               <img
-                 src="/images/hero-app.PNG"
-                 alt=""
-                 aria-hidden="true"
-                 className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-30"
-               />
-
-               {/* Foreground screenshot (keeps full image) */}
-               <div className="relative z-10 w-full h-full flex items-center justify-center">
-                 <img
-                   src="/images/hero-app.PNG"
-                   alt="Ma Ville Verte App"
-                   className="w-full h-full object-contain"
-                   onError={(e) => {
-                     // Fallback visual if image missing
-                     e.currentTarget.style.display = 'none';
-                     e.currentTarget.parentElement?.parentElement?.classList.add(
-                       'bg-gradient-to-br',
-                       'from-primary/10',
-                       'to-blue-100/40',
-                     );
-                   }}
-                 />
-               </div>
-
-               {/* Fallback Content (visible only if image fails to load) */}
-               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 -z-10">
-                 <p className="text-secondary/50 font-medium">Capture d'écran de l'accueil ici</p>
-                 <p className="text-xs text-secondary/30 mt-2">/images/hero-app.PNG</p>
-               </div>
-             </div>
-           </div>
+          <PhoneMockup
+            src="/images/hero-app.PNG"
+            alt="Aperçu de l'application Ma Ville Verte et Moi"
+            className="w-[320px] lg:w-[360px]"
+          />
         </motion.div>
       </div>
     </section>

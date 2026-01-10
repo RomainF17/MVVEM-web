@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Map, Newspaper, Sprout, HeartHandshake } from 'lucide-react';
+import { PhoneMockup } from './PhoneMockup';
 
 const features = [
   {
@@ -85,42 +86,11 @@ export const Features = () => {
 
               {/* Visual/Phone Mockup */}
               <div className="flex-1 w-full flex justify-center">
-                <div className="relative w-[300px] h-[600px] bg-secondary rounded-[3rem] border-8 border-secondary shadow-2xl overflow-hidden ring-4 ring-secondary/20">
-                  {/* Status Bar */}
-                  <div className="absolute top-0 w-full h-8 bg-secondary z-20 flex justify-between px-6 items-center">
-                    <div className="w-12 h-4 bg-black/20 rounded-full mx-auto" />
-                  </div>
-                  
-                  {/* Screen Content - Image */}
-                  <div className="w-full h-full bg-white pt-8 relative overflow-hidden">
-                    {/* Background blur to avoid white side bands */}
-                    <img
-                      src={feature.image}
-                      alt=""
-                      aria-hidden="true"
-                      className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-30"
-                    />
-
-                    {/* Foreground screenshot (keeps full image) */}
-                    <div className="relative z-10 w-full h-full flex items-center justify-center">
-                      <img 
-                        src={feature.image} 
-                        alt={`Interface ${feature.title}`}
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          // Fallback si l'image n'existe pas encore
-                          e.currentTarget.src = "https://images.unsplash.com/photo-1512428559087-560fa5ce7d5b?auto=format&fit=crop&q=80&w=600&h=1200";
-                          e.currentTarget.className = "w-full h-full object-cover opacity-50 grayscale";
-                        }}
-                      />
-                    </div>
-                    
-                    {/* Overlay si pas d'image (texte d'aide) */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                       <span className="sr-only">Image de l'application</span>
-                    </div>
-                  </div>
-                </div>
+                <PhoneMockup
+                  src={feature.image}
+                  alt={`Interface ${feature.title}`}
+                  className="w-[300px] lg:w-[320px]"
+                />
               </div>
             </motion.div>
           ))}
