@@ -9,6 +9,7 @@ const team = [
   { name: "Romain", role: "Co-fondateur" },
 ];
 
+// Composant Team mis à jour avec formulaire Formspree
 export const Team = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
