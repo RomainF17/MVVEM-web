@@ -27,7 +27,7 @@ const features = [
     icon: Map,
     color: "bg-blue-100 text-blue-700",
     points: ["Carte interactive", "Filtres par catégorie", "Découverte locale"],
-    image: "/images/feature-carte.png"
+    image: "/images/feature-carte.PNG"
   },
   {
     id: "soutenir",
