@@ -1,7 +1,6 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Leaf, TreePine, Flower2 } from 'lucide-react';
 import { PhoneMockup } from './PhoneMockup';
-import { useRef } from 'react';
 
 const FloatingElement = ({ 
   children, 
@@ -35,19 +34,8 @@ const FloatingElement = ({
 );
 
 export const Hero = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-  
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-
   return (
     <section 
-      ref={containerRef}
       className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-20"
     >
       {/* Animated mesh background */}
@@ -55,7 +43,6 @@ export const Hero = () => {
       
       {/* Animated gradient orbs */}
       <motion.div 
-        style={{ y }}
         className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-[120px] opacity-30"
         animate={{
           background: [
@@ -68,7 +55,6 @@ export const Hero = () => {
       />
       
       <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
         className="absolute -bottom-32 -left-32 w-[600px] h-[600px] rounded-full blur-[100px] opacity-20"
         animate={{
           background: [
@@ -123,10 +109,7 @@ export const Hero = () => {
         }}
       />
 
-      <motion.div 
-        style={{ opacity, scale }}
-        className="container mx-auto px-6 relative z-10"
-      >
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
           <motion.div 
@@ -269,23 +252,13 @@ export const Hero = () => {
               <div className="absolute w-[380px] h-[380px] rounded-full border border-emerald-400/10 animate-spin-slow" style={{ animationDirection: 'reverse' }} />
             </div>
             
-            <motion.div
-              animate={{ 
-                y: [0, -15, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="relative z-10"
-            >
+            <div className="relative z-10">
               <PhoneMockup
                 src="/images/hero-app.PNG"
                 alt="Aperçu de l'application Ma Ville Verte et Moi"
                 className="w-[340px] drop-shadow-2xl"
               />
-            </motion.div>
+            </div>
           </motion.div>
         </div>
 
@@ -307,7 +280,7 @@ export const Hero = () => {
             />
           </div>
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <motion.div 
