@@ -18,19 +18,19 @@ export function PhoneMockup({ src, alt, className }: PhoneMockupProps) {
         <div className="pointer-events-none absolute inset-0 rounded-[3.25rem] bg-gradient-to-b from-white/10 to-transparent" />
 
         {/* Bezel */}
-        <div className="rounded-[2.85rem] bg-black p-[6px]">
+        <div className="rounded-[2.85rem] bg-transparent">
           {/* Screen */}
-          <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.55rem] bg-black">
+          <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.55rem]">
             {/* Screenshot */}
             <img
               src={src}
               alt={alt}
-              className="absolute inset-0 h-full w-full object-contain"
+              className="absolute inset-0 h-full w-full object-cover object-top"
               loading="lazy"
             />
 
             {/* Dynamic Island (smaller on mobile, unchanged on desktop) */}
-            <div className="pointer-events-none absolute left-1/2 top-[10px] h-[22px] w-[92px] -translate-x-1/2 rounded-full bg-black/95 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.8)] md:h-[28px] md:w-[120px]" />
+            <div className="pointer-events-none absolute left-1/2 top-[10px] h-[16px] w-[72px] -translate-x-1/2 rounded-full bg-black/95 shadow-[0_10px_24px_-18px_rgba(0,0,0,0.8)] md:h-[20px] md:w-[96px]" />
 
             {/* Screen glass */}
             <div className="pointer-events-none absolute inset-0 ring-1 ring-white/10" />

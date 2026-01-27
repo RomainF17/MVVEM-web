@@ -202,3 +202,12 @@
   transform: translateY(0);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
+
+/* Prose content - preserve empty paragraphs for spacing */
+.prose p:empty {
+  min-height: 1em;
+}
+
+.prose p:empty::before {
+  content: '\00a0';
+}

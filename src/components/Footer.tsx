@@ -67,9 +67,9 @@ export const Footer = () => {
               
               {/* Contact info */}
               <div className="space-y-3">
-                <a href="mailto:contact@mavilleverte.fr" className="flex items-center gap-3 text-white/70 hover:text-primary transition-colors group">
+                <a href="mailto:mavilleverte@proton.me" className="flex items-center gap-3 text-white/70 hover:text-primary transition-colors group">
                   <Mail className="w-5 h-5" />
-                  <span>contact@mavilleverte.fr</span>
+                  <span>mavilleverte@proton.me</span>
                   <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
                 <div className="flex items-center gap-3 text-white/70">

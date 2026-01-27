@@ -1,22 +1,33 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Leaf, Menu, X, Download } from 'lucide-react';
-import { Hero } from './components/Hero';
-import { Mission } from './components/Mission';
-import { Stats } from './components/Stats';
-import { Features } from './components/Features';
-import { Team } from './components/Team';
+import { Leaf, Menu, X, Download, Settings, Newspaper, ShoppingBag, Star, Smartphone } from 'lucide-react';
+import { HomePage } from './pages/HomePage';
+import { ArticlesPage } from './pages/ArticlesPage';
+import { ShopPage } from './pages/ShopPage';
+import { RecommendationsPage } from './pages/RecommendationsPage';
+import { AppPage } from './pages/AppPage';
 import { Footer } from './components/Footer';
 
 const navLinks = [
-  { label: "Mission", href: "#mission" },
-  { label: "Fonctionnalités", href: "#features" },
-  { label: "Équipe", href: "#team" },
+  { label: "Articles", to: "/articles", icon: Newspaper },
+  { label: "Boutique", to: "/boutique", icon: ShoppingBag },
+  { label: "Recommandations", to: "/recommandations", icon: Star },
+  { label: "Application", to: "/application", icon: Smartphone },
 ];
 
-function App() {
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+function AppContent() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +36,10 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-background font-sans">
@@ -42,7 +57,7 @@ function App() {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-3 group">
+            <Link to="/" className="flex items-center gap-3 group">
               <motion.div 
                 whileHover={{ scale: 1.05, rotate: 5 }}
                 className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/25"
@@ -52,23 +67,31 @@ function App() {
               <div className="hidden sm:block">
                 <span className="font-display font-bold text-xl text-secondary tracking-tight">Ma Ville Verte</span>
               </div>
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
-                <a 
-                  key={link.href}
-                  href={link.href} 
-                  className="relative px-5 py-2.5 text-sm font-semibold text-secondary/70 hover:text-secondary transition-colors rounded-full hover:bg-secondary/5"
+                <Link 
+                  key={link.to}
+                  to={link.to} 
+                  className="relative flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-secondary/70 hover:text-secondary transition-colors rounded-full hover:bg-secondary/5"
                 >
+                  <link.icon className="w-4 h-4" />
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
 
             {/* CTA Button */}
             <div className="flex items-center gap-4">
+              <a
+                href="/admin.html"
+                className="hidden sm:flex items-center gap-2 text-secondary/60 hover:text-secondary transition-colors"
+                title="Administration"
+              >
+                <Settings className="w-5 h-5" />
+              </a>
               <motion.button 
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -105,17 +128,20 @@ function App() {
             >
               <div className="container mx-auto px-6 py-6 space-y-2">
                 {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.href}
+                  <motion.div
+                    key={link.to}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-3 text-secondary font-semibold rounded-xl hover:bg-primary/5 transition-colors"
                   >
-                    {link.label}
-                  </motion.a>
+                    <Link
+                      to={link.to}
+                      className="flex items-center gap-3 px-4 py-3 text-secondary font-semibold rounded-xl hover:bg-primary/5 transition-colors"
+                    >
+                      <link.icon className="w-5 h-5" />
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 ))}
                 <motion.button
                   initial={{ opacity: 0, y: 10 }}
@@ -126,6 +152,17 @@ function App() {
                   <Download className="w-5 h-5" />
                   Télécharger l'application
                 </motion.button>
+                <motion.a
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  href="/admin.html"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full mt-2 flex items-center justify-center gap-2 border border-gray-300 text-secondary px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-all"
+                >
+                  <Settings className="w-5 h-5" />
+                  Administration
+                </motion.a>
               </div>
             </motion.div>
           )}
@@ -133,16 +170,27 @@ function App() {
       </motion.nav>
 
       <main>
-        <Hero />
-        <Mission />
-        <Stats />
-        <Features />
-        <Team />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/articles" element={<ArticlesPage />} />
+          <Route path="/boutique" element={<ShopPage />} />
+          <Route path="/recommandations" element={<RecommendationsPage />} />
+          <Route path="/application" element={<AppPage />} />
+        </Routes>
       </main>
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <AppContent />
+    </BrowserRouter>
+  );
+}
+
+export default App;

@@ -1,3 +1,14 @@
 name = "mvvem-web"
 compatibility_date = "2024-01-10"
 pages_build_output_dir = "./dist"
+
+# Cloudflare D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "mvvem-db"
+database_id = "5cdc05c5-0868-4d0c-a794-97d966c7b822"
+
+# Cloudflare R2 Storage
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "mvvem-images"

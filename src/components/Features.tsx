@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Map, Newspaper, Sprout, HeartHandshake, Sparkles, ArrowRight } from 'lucide-react';
+import { Map, Newspaper, Sprout, Flower2, Sparkles, ArrowRight } from 'lucide-react';
 import { PhoneMockup } from './PhoneMockup';
 import { useRef } from 'react';
 
@@ -63,22 +63,24 @@ const features = [
     image: "/images/feature-carte.png"
   },
   {
-    id: "soutenir",
-    title: "Soutenir",
-    subtitle: "Financez les projets innovants",
+    id: "mes-plantes",
+    title: "Mes Plantes",
+    subtitle: "Prenez soin de vos plantes",
     description: [
-      "L'onglet Financement participatif permet à des membres de la communauté de proposer et/ou soutenir des projets verts innovants nécessitant un apport financier et matériel plus important pour sa mise en place.",
+      "L'onglet Mes Plantes vous permet d'enregistrer toutes vos plantes et de maîtriser leur arrosage grâce à des rappels personnalisés.",
+      "Accédez à des fiches détaillées sur chaque espèce et identifiez vos plantes simplement en prenant une photo.",
     ],
-    icon: HeartHandshake,
+    icon: Flower2,
     gradient: "from-amber-500 to-orange-500",
     bgGradient: "from-amber-50 via-orange-50/50 to-white",
     accentColor: "amber",
     points: [
-      "Financement participatif communautaire",
-      "Soutenir des projets verts innovants",
-      "Suivi simple & transparent",
+      "Enregistrer et gérer ses plantes",
+      "Rappels d'arrosage personnalisés",
+      "Fiches d'informations détaillées",
+      "Reconnaissance d'espèces par photo",
     ],
-    image: "/images/feature-financer.PNG"
+    image: "/images/mes-plantes.PNG"
   }
 ];
 
