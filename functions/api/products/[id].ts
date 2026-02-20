@@ -15,6 +15,13 @@ interface Product {
   updatedAt: string;
 }
 
+interface ProductImage {
+  id: string;
+  product_id: string;
+  url: string;
+  position: number;
+}
+
 function corsHeaders(): Record<string, string> {
   return {
     'Access-Control-Allow-Origin': '*',
@@ -34,20 +41,24 @@ function jsonResponse(data: unknown, status = 200): Response {
   });
 }
 
-// GET /api/products/:id - Get single published product
+// GET /api/products/:id - Get single published product with its images
 export const onRequestGet: PagesFunction<Env> = async ({ env, params }) => {
   try {
     const id = params.id as string;
-    
-    const result = await env.DB.prepare(
+
+    const product = await env.DB.prepare(
       `SELECT * FROM products WHERE id = ? AND status = 'published'`
     ).bind(id).first<Product>();
-    
-    if (!result) {
+
+    if (!product) {
       return jsonResponse({ error: 'Produit non trouvé' }, 404);
     }
-    
-    return jsonResponse(result);
+
+    const imagesResult = await env.DB.prepare(
+      `SELECT id, product_id, url, position FROM product_images WHERE product_id = ? ORDER BY position ASC`
+    ).bind(id).all<ProductImage>();
+
+    return jsonResponse({ ...product, images: imagesResult.results });
   } catch (error) {
     console.error('Error fetching product:', error);
     return jsonResponse({ error: 'Erreur serveur' }, 500);

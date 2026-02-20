@@ -15,6 +15,17 @@ interface Product {
   updatedAt: string;
 }
 
+interface ProductImage {
+  id: string;
+  product_id: string;
+  url: string;
+  position: number;
+}
+
+function generateId(prefix: string): string {
+  return `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+}
+
 function corsHeaders(): Record<string, string> {
   return {
     'Access-Control-Allow-Origin': '*',
@@ -37,16 +48,20 @@ function jsonResponse(data: unknown, status = 200): Response {
 export const onRequestGet: PagesFunction<Env> = async ({ env, params }) => {
   try {
     const id = params.id as string;
-    
-    const result = await env.DB.prepare(
+
+    const product = await env.DB.prepare(
       `SELECT * FROM products WHERE id = ?`
     ).bind(id).first<Product>();
-    
-    if (!result) {
+
+    if (!product) {
       return jsonResponse({ error: 'Produit non trouvé' }, 404);
     }
-    
-    return jsonResponse(result);
+
+    const imagesResult = await env.DB.prepare(
+      `SELECT id, product_id, url, position FROM product_images WHERE product_id = ? ORDER BY position ASC`
+    ).bind(id).all<ProductImage>();
+
+    return jsonResponse({ ...product, images: imagesResult.results });
   } catch (error) {
     console.error('Error fetching product:', error);
     return jsonResponse({ error: 'Erreur serveur' }, 500);
@@ -57,41 +72,61 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, params }) => {
 export const onRequestPut: PagesFunction<Env> = async ({ env, params, request }) => {
   try {
     const id = params.id as string;
-    
+
     const existing = await env.DB.prepare(
       `SELECT * FROM products WHERE id = ?`
     ).bind(id).first<Product>();
-    
+
     if (!existing) {
       return jsonResponse({ error: 'Produit non trouvé' }, 404);
     }
-    
-    const body = await request.json() as Partial<Product>;
+
+    const body = await request.json() as Partial<Product> & { images?: { url: string; position: number }[] };
     const now = new Date().toISOString();
-    
-    await env.DB.prepare(
-      `UPDATE products SET 
-        title = ?, 
-        description = ?, 
-        category = ?, 
-        price = ?, 
-        imageUrl = ?, 
-        affiliateLink = ?, 
-        status = ?, 
-        updatedAt = ?
-       WHERE id = ?`
-    ).bind(
-      body.title ?? existing.title,
-      body.description ?? existing.description,
-      body.category ?? existing.category,
-      body.price ?? existing.price,
-      body.imageUrl ?? existing.imageUrl,
-      body.affiliateLink ?? existing.affiliateLink,
-      body.status ?? existing.status,
-      now,
-      id
-    ).run();
-    
+    const images = body.images || [];
+
+    // Determine imageUrl from first image
+    const firstImageUrl = images.length > 0 ? images[0].url : (body.imageUrl ?? existing.imageUrl);
+
+    const statements: D1PreparedStatement[] = [
+      env.DB.prepare(
+        `UPDATE products SET
+          title = ?,
+          description = ?,
+          category = ?,
+          price = ?,
+          imageUrl = ?,
+          affiliateLink = ?,
+          status = ?,
+          updatedAt = ?
+         WHERE id = ?`
+      ).bind(
+        body.title ?? existing.title,
+        body.description ?? existing.description,
+        body.category ?? existing.category,
+        body.price ?? existing.price,
+        firstImageUrl,
+        body.affiliateLink ?? existing.affiliateLink,
+        body.status ?? existing.status,
+        now,
+        id
+      ),
+      // Delete all existing images for this product
+      env.DB.prepare(`DELETE FROM product_images WHERE product_id = ?`).bind(id),
+    ];
+
+    // Insert new images
+    for (const img of images) {
+      const imgId = generateId('img');
+      statements.push(
+        env.DB.prepare(
+          `INSERT INTO product_images (id, product_id, url, position) VALUES (?, ?, ?, ?)`
+        ).bind(imgId, id, img.url, img.position)
+      );
+    }
+
+    await env.DB.batch(statements);
+
     return jsonResponse({ message: 'Produit mis à jour' });
   } catch (error) {
     console.error('Error updating product:', error);
@@ -103,15 +138,16 @@ export const onRequestPut: PagesFunction<Env> = async ({ env, params, request })
 export const onRequestDelete: PagesFunction<Env> = async ({ env, params }) => {
   try {
     const id = params.id as string;
-    
+
+    // product_images rows are deleted automatically via ON DELETE CASCADE
     const result = await env.DB.prepare(
       `DELETE FROM products WHERE id = ?`
     ).bind(id).run();
-    
+
     if (result.meta.changes === 0) {
       return jsonResponse({ error: 'Produit non trouvé' }, 404);
     }
-    
+
     return jsonResponse({ message: 'Produit supprimé' });
   } catch (error) {
     console.error('Error deleting product:', error);

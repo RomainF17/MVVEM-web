@@ -15,6 +15,13 @@ interface Product {
   updatedAt: string;
 }
 
+interface ProductImage {
+  id: string;
+  product_id: string;
+  url: string;
+  position: number;
+}
+
 function corsHeaders(): Record<string, string> {
   return {
     'Access-Control-Allow-Origin': '*',
@@ -34,17 +41,44 @@ function jsonResponse(data: unknown, status = 200): Response {
   });
 }
 
-// GET /api/products - List published products
+// GET /api/products - List published products with their images
 export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
   try {
-    const result = await env.DB.prepare(
-      `SELECT id, title, description, category, price, imageUrl, affiliateLink, createdAt, updatedAt 
-       FROM products 
-       WHERE status = 'published' 
+    const productsResult = await env.DB.prepare(
+      `SELECT id, title, description, category, price, imageUrl, affiliateLink, createdAt, updatedAt
+       FROM products
+       WHERE status = 'published'
        ORDER BY createdAt DESC`
     ).all<Product>();
-    
-    return jsonResponse(result.results);
+
+    const products = productsResult.results;
+
+    if (products.length === 0) {
+      return jsonResponse([]);
+    }
+
+    const imagesResult = await env.DB.prepare(
+      `SELECT pi.id, pi.product_id, pi.url, pi.position
+       FROM product_images pi
+       INNER JOIN products p ON pi.product_id = p.id
+       WHERE p.status = 'published'
+       ORDER BY pi.position ASC`
+    ).all<ProductImage>();
+
+    const imagesByProduct: Record<string, ProductImage[]> = {};
+    for (const img of imagesResult.results) {
+      if (!imagesByProduct[img.product_id]) {
+        imagesByProduct[img.product_id] = [];
+      }
+      imagesByProduct[img.product_id].push(img);
+    }
+
+    const productsWithImages = products.map((p) => ({
+      ...p,
+      images: imagesByProduct[p.id] || [],
+    }));
+
+    return jsonResponse(productsWithImages);
   } catch (error) {
     console.error('Error fetching products:', error);
     return jsonResponse({ error: 'Erreur serveur' }, 500);

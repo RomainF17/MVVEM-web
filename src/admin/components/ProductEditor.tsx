@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Save, Upload, Link, ShoppingBag } from 'lucide-react';
+import { ArrowLeft, Save, Upload, Link, ShoppingBag, X, ChevronUp, ChevronDown, Loader2 } from 'lucide-react';
 import type { ProductFormData } from '../types/product';
 import { fetchProduct, createProduct, updateProduct } from '../api/products';
 import { uploadImage } from '../api';
@@ -22,21 +22,26 @@ const CATEGORIES = [
   'Autre',
 ];
 
-const emptyForm: ProductFormData = {
+const emptyForm: Omit<ProductFormData, 'images' | 'imageUrl'> = {
   title: '',
   description: '',
   category: '',
   price: null,
-  imageUrl: '',
   affiliateLink: '',
   status: 'draft',
 };
 
+interface ImageEntry {
+  url: string;
+  position: number;
+}
+
 export function ProductEditor({ productId, onBack, onSaved }: ProductEditorProps) {
-  const [form, setForm] = useState<ProductFormData>(emptyForm);
+  const [form, setForm] = useState(emptyForm);
+  const [images, setImages] = useState<ImageEntry[]>([]);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [uploadingCount, setUploadingCount] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
   const isEditing = productId !== null;
@@ -56,10 +61,15 @@ export function ProductEditor({ productId, onBack, onSaved }: ProductEditorProps
         description: product.description || '',
         category: product.category || '',
         price: product.price,
-        imageUrl: product.imageUrl || '',
         affiliateLink: product.affiliateLink || '',
         status: product.status,
       });
+      // Load images from product, fallback to imageUrl if no images array
+      if (product.images && product.images.length > 0) {
+        setImages(product.images.map((img, i) => ({ url: img.url, position: i })));
+      } else if (product.imageUrl) {
+        setImages([{ url: product.imageUrl, position: 0 }]);
+      }
     } catch (err) {
       setError('Erreur lors du chargement du produit');
       console.error(err);
@@ -68,25 +78,55 @@ export function ProductEditor({ productId, onBack, onSaved }: ProductEditorProps
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleImagesUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const fileArray = Array.from(files);
+    setUploadingCount(fileArray.length);
 
     try {
-      setUploading(true);
-      const result = await uploadImage(file);
-      setForm({ ...form, imageUrl: result.url });
+      const uploadedUrls: string[] = [];
+      for (const file of fileArray) {
+        const result = await uploadImage(file);
+        uploadedUrls.push(result.url);
+        setUploadingCount((prev) => prev - 1);
+      }
+
+      setImages((prev) => {
+        const newImages = [...prev];
+        for (const url of uploadedUrls) {
+          newImages.push({ url, position: newImages.length });
+        }
+        return newImages;
+      });
     } catch (err) {
-      alert('Erreur lors de l\'upload de l\'image');
+      alert("Erreur lors de l'upload des images");
       console.error(err);
-    } finally {
-      setUploading(false);
+      setUploadingCount(0);
     }
+
+    // Reset input so same files can be selected again
+    e.target.value = '';
+  };
+
+  const removeImage = (index: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== index).map((img, i) => ({ ...img, position: i })));
+  };
+
+  const moveImage = (index: number, direction: 'up' | 'down') => {
+    setImages((prev) => {
+      const next = [...prev];
+      const swapIndex = direction === 'up' ? index - 1 : index + 1;
+      if (swapIndex < 0 || swapIndex >= next.length) return prev;
+      [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+      return next.map((img, i) => ({ ...img, position: i }));
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!form.title.trim()) {
       setError('Le titre est requis');
       return;
@@ -96,10 +136,19 @@ export function ProductEditor({ productId, onBack, onSaved }: ProductEditorProps
       setSaving(true);
       setError(null);
 
+      const imagesWithPositions = images.map((img, i) => ({ url: img.url, position: i }));
+      const firstImageUrl = images.length > 0 ? images[0].url : '';
+
+      const formData: ProductFormData = {
+        ...form,
+        imageUrl: firstImageUrl,
+        images: imagesWithPositions,
+      };
+
       if (isEditing) {
-        await updateProduct(productId, form);
+        await updateProduct(productId, formData);
       } else {
-        await createProduct(form);
+        await createProduct(formData);
       }
 
       onSaved();
@@ -144,38 +193,85 @@ export function ProductEditor({ productId, onBack, onSaved }: ProductEditorProps
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Image */}
+          {/* Images */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Image du produit
+              Photos du produit
             </label>
-            <div className="flex items-start gap-4">
-              {form.imageUrl ? (
-                <img
-                  src={form.imageUrl}
-                  alt="Aperçu"
-                  className="w-32 h-32 object-cover rounded-lg border border-gray-200"
-                />
-              ) : (
-                <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <ShoppingBag className="w-8 h-8 text-gray-300" />
-                </div>
-              )}
-              <div className="flex-1">
-                <label className="cursor-pointer inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-colors">
-                  <Upload className="w-4 h-4" />
-                  {uploading ? 'Upload...' : 'Choisir une image'}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                    disabled={uploading}
-                  />
-                </label>
-                <p className="text-xs text-gray-500 mt-2">JPG, PNG, WebP. Max 10 Mo.</p>
+
+            {/* Image grid */}
+            {images.length > 0 && (
+              <div className="flex flex-wrap gap-3 mb-3">
+                {images.map((img, index) => (
+                  <div key={index} className="relative group w-28 h-28">
+                    <img
+                      src={img.url}
+                      alt={`Photo ${index + 1}`}
+                      className="w-full h-full object-cover rounded-lg border border-gray-200"
+                    />
+                    {/* Principale badge */}
+                    {index === 0 && (
+                      <span className="absolute bottom-1 left-1 right-1 text-center text-[10px] font-bold bg-emerald-600 text-white rounded px-1 py-0.5 leading-none">
+                        Principale
+                      </span>
+                    )}
+                    {/* Controls overlay */}
+                    <div className="absolute inset-0 bg-black/40 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1">
+                      <button
+                        type="button"
+                        onClick={() => moveImage(index, 'up')}
+                        disabled={index === 0}
+                        className="w-7 h-7 bg-white rounded flex items-center justify-center disabled:opacity-30 hover:bg-gray-100"
+                        title="Déplacer avant"
+                      >
+                        <ChevronUp className="w-4 h-4 text-gray-700" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        className="w-7 h-7 bg-red-500 rounded flex items-center justify-center hover:bg-red-600"
+                        title="Supprimer"
+                      >
+                        <X className="w-4 h-4 text-white" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => moveImage(index, 'down')}
+                        disabled={index === images.length - 1}
+                        className="w-7 h-7 bg-white rounded flex items-center justify-center disabled:opacity-30 hover:bg-gray-100"
+                        title="Déplacer après"
+                      >
+                        <ChevronDown className="w-4 h-4 text-gray-700" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Upload spinner placeholder(s) */}
+                {uploadingCount > 0 && Array.from({ length: uploadingCount }).map((_, i) => (
+                  <div key={`uploading-${i}`} className="w-28 h-28 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
+                    <Loader2 className="w-6 h-6 text-gray-400 animate-spin" />
+                  </div>
+                ))}
               </div>
-            </div>
+            )}
+
+            {/* Add images button */}
+            <label className={`cursor-pointer inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-colors ${uploadingCount > 0 ? 'opacity-50 pointer-events-none' : ''}`}>
+              <Upload className="w-4 h-4" />
+              {images.length === 0 ? 'Ajouter des photos' : 'Ajouter d\'autres photos'}
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleImagesUpload}
+                className="hidden"
+                disabled={uploadingCount > 0}
+              />
+            </label>
+            <p className="text-xs text-gray-500 mt-2">
+              JPG, PNG, WebP. Max 10 Mo par photo. Passez la souris sur une photo pour la réordonner ou la supprimer.
+            </p>
           </div>
 
           {/* Titre */}
@@ -294,7 +390,7 @@ export function ProductEditor({ productId, onBack, onSaved }: ProductEditorProps
             </button>
             <button
               type="submit"
-              disabled={saving}
+              disabled={saving || uploadingCount > 0}
               className="flex-1 flex items-center justify-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50"
             >
               <Save className="w-5 h-5" />
