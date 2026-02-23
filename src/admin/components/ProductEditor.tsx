@@ -17,6 +17,7 @@ const CATEGORIES = [
   'Graines/Plants',
   'Potagers d\'intérieurs',
   'Arrosage',
+  'Lingots',
   'Transport',
   'Énergie',
   'Mode durable',
