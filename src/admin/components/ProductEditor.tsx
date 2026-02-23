@@ -12,9 +12,10 @@ interface ProductEditorProps {
 }
 
 const CATEGORIES = [
-  'Ustensiles',
+  'Pots/Bacs',
   'Maison écologique',
   'Graines/Plants',
+  'Potagers d\'intérieurs',
   'Transport',
   'Énergie',
   'Mode durable',
