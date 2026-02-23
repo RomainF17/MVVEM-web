@@ -12,9 +12,9 @@ interface ProductEditorProps {
 }
 
 const CATEGORIES = [
-  'Jardinage',
+  'Ustensiles',
   'Maison écologique',
-  'Alimentation',
+  'Graines/Plants',
   'Transport',
   'Énergie',
   'Mode durable',
