@@ -16,6 +16,7 @@ const CATEGORIES = [
   'Maison écologique',
   'Graines/Plants',
   'Potagers d\'intérieurs',
+  'Arrosage',
   'Transport',
   'Énergie',
   'Mode durable',
