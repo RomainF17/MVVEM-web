@@ -187,8 +187,8 @@ export const Stats = () => {
         >
           <div className="relative bg-gray-900 rounded-[3rem] p-12 md:p-20 overflow-hidden group">
             {/* Ambient luxury lighting */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-emerald-500/20 via-teal-500/10 to-transparent rounded-full blur-[100px] mix-blend-screen opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-lime-500/20 via-emerald-500/10 to-transparent rounded-full blur-[100px] mix-blend-screen opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-emerald-500/20 via-teal-500/10 to-transparent rounded-full blur-[60px] opacity-40 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-lime-500/20 via-emerald-500/10 to-transparent rounded-full blur-[60px] opacity-40 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none" />
 
             <div className="relative z-10 max-w-5xl mx-auto">
               <motion.h3

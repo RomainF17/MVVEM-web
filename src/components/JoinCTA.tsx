@@ -46,17 +46,11 @@ export const JoinCTA = () => {
       {/* Immersive background aura */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.4, 0.6, 0.4],
-            rotate: [0, 90, 0]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] md:w-[80vw] md:h-[80vw]"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[60vw] md:h-[60vw] opacity-20 pointer-events-none"
         >
-          <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_340deg,rgba(16,185,129,0.3)_360deg)] rounded-full blur-[100px]" />
-          <div className="absolute inset-0 bg-[conic-gradient(from_90deg,transparent_0_340deg,rgba(20,184,166,0.3)_360deg)] rounded-full blur-[100px]" />
-          <div className="absolute inset-0 bg-[conic-gradient(from_180deg,transparent_0_340deg,rgba(52,211,153,0.3)_360deg)] rounded-full blur-[100px]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/40 to-teal-500/40 rounded-full blur-[80px]" />
         </motion.div>
 
         {/* Deep background color mesh */}

@@ -175,7 +175,7 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[0]; index: n
         className={`relative flex justify-center items-center ${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}
       >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className={`w-[120%] h-[120%] bg-gradient-to-br ${feature.gradient} blur-[120px] opacity-[0.15] rounded-full`} />
+          <div className={`w-[120%] h-[120%] bg-gradient-to-br ${feature.gradient} blur-[60px] opacity-[0.10] rounded-full`} />
         </div>
 
         <motion.div

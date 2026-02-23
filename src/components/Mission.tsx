@@ -5,7 +5,7 @@ export const Mission = () => {
   return (
     <section id="mission" className="py-32 px-6 relative overflow-hidden bg-white">
       {/* Absolute massive background text */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center mix-blend-overlay opacity-5 pointer-events-none select-none">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center opacity-[0.03] pointer-events-none select-none">
         <h2 className="text-[200px] md:text-[300px] font-display font-bold text-emerald-900 leading-none whitespace-nowrap">MISSION</h2>
       </div>
 
@@ -43,8 +43,8 @@ export const Mission = () => {
           {/* Super Premium Card with heavy glassmorphism */}
           <div className="relative bg-white/60 backdrop-blur-3xl rounded-[3rem] p-12 md:p-20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white overflow-hidden group hover:shadow-[0_20px_60px_rgb(16,185,129,0.08)] transition-all duration-700">
             {/* Elegant Background Gradients inside card */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-emerald-400/10 to-teal-400/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-700" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-teal-500/10 to-emerald-400/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 group-hover:scale-110 transition-transform duration-700" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-emerald-400/10 to-teal-400/5 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-700" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-teal-500/10 to-emerald-400/5 rounded-full blur-[40px] translate-y-1/2 -translate-x-1/2 group-hover:scale-110 transition-transform duration-700" />
 
             <div className="relative z-10">
               {/* Massive background quote mark */}

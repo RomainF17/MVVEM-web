@@ -40,27 +40,15 @@ export const Hero = () => {
     >
       {/* Animated gradient orbs */}
       <motion.div
-        className="absolute -top-40 right-0 w-[1000px] h-[1000px] rounded-full blur-[140px] opacity-40 mix-blend-multiply"
-        animate={{
-          background: [
-            'radial-gradient(circle, rgba(16,185,129,0.3) 0%, rgba(5,150,105,0.1) 50%, transparent 70%)',
-            'radial-gradient(circle, rgba(52,211,153,0.3) 0%, rgba(16,185,129,0.1) 50%, transparent 70%)',
-            'radial-gradient(circle, rgba(16,185,129,0.3) 0%, rgba(5,150,105,0.1) 50%, transparent 70%)',
-          ],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        className="absolute -top-40 right-0 w-[800px] h-[800px] rounded-full blur-[100px] bg-gradient-to-bl from-emerald-400/20 to-teal-400/5 pointer-events-none"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.6, 0.8, 0.6] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <motion.div
-        className="absolute -bottom-32 -left-40 w-[800px] h-[800px] rounded-full blur-[120px] opacity-30 mix-blend-multiply"
-        animate={{
-          background: [
-            'radial-gradient(circle, rgba(52,211,153,0.4) 0%, rgba(4,120,87,0.1) 50%, transparent 70%)',
-            'radial-gradient(circle, rgba(16,185,129,0.4) 0%, rgba(52,211,153,0.1) 50%, transparent 70%)',
-            'radial-gradient(circle, rgba(52,211,153,0.4) 0%, rgba(4,120,87,0.1) 50%, transparent 70%)',
-          ],
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 1 }}
+        className="absolute -bottom-32 -left-40 w-[600px] h-[600px] rounded-full blur-[100px] bg-gradient-to-tr from-teal-400/20 to-emerald-400/5 pointer-events-none"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
       {/* Grid pattern overlay */}
@@ -227,7 +215,7 @@ export const Hero = () => {
           >
             {/* Epic Glow effect behind phone */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg aspect-square">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-400/40 via-teal-300/20 to-lime-300/30 blur-[100px] animate-pulse-slow mix-blend-multiply" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-400/20 via-teal-300/10 to-lime-300/10 blur-[80px] animate-pulse-slow" />
             </div>
 
             {/* Decorative orbit rings */}
