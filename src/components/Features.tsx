@@ -9,7 +9,7 @@ const features = [
     title: "Échanger & proposer",
     subtitle: "Créez et partagez vos initiatives",
     description: [
-      "Chaque membre de la communauté pourra créer et proposer une initiative verte qui pourra se dérouler dans sa ville à un temps donné. Une initiative permet aussi bien de partager des connaissances que de s'organiser avec les gens de son quartier : la forme reste libre, place aux propositions.",
+      "Chaque membre de la communauté pourra créer et proposer une initiative verte qui pourra se dérouler dans sa ville à un temps donné. Une initiative permet aussi bien de partager des connaissances que de s'organiser avec les gens de son quartier : la forme reste libre, place aux propositions. Ma Ville Verte est un espace ouvert pour vous permettre de créer votre propre vision de la ville verte.",
       "Celle-ci pourra être vue par tous les utilisateurs de l'application qui pourront faire le choix d'y participer, de la suivre et/ou de la partager.",
     ],
     icon: Sprout,
