@@ -137,32 +137,6 @@ export const Stats = () => {
           ))}
         </div>
 
-        {/* Bottom content card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-20"
-        >
-          <div className="relative bg-neutral-950 rounded-3xl p-12 md:p-20 overflow-hidden">
-            <div className="relative z-10 max-w-5xl mx-auto">
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-white mb-12 text-center leading-tight tracking-tight">
-                La mobilisation citoyenne au cœur de la{' '}
-                <span className="text-emerald-400">transition</span>
-              </h3>
-
-              <div className="grid md:grid-cols-2 gap-10 text-neutral-300 leading-relaxed text-lg">
-                <p>
-                  D'un côté, les Français ont soif de démocratie et souhaitent être davantage associés aux décisions qui les concernent au quotidien. De l'autre, la lutte contre le réchauffement climatique implique de tels changements qu'il est impossible de réaliser cette transition sans l'adhésion du plus grand nombre.
-                </p>
-                <p>
-                  Qu'il s'agisse d'aménagement urbain, de mobilité ou d'énergie, la coopération des habitants permet d'inventer des réponses inédites. La participation citoyenne est un moyen pragmatique et enthousiaste de mieux fabriquer la cité de demain.
-                </p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

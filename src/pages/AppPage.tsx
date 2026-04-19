@@ -5,6 +5,7 @@ import { Hero } from '../components/Hero';
 import { Features } from '../components/Features';
 import { Mission } from '../components/Mission';
 import { Stats } from '../components/Stats';
+import { Conviction } from '../components/Conviction';
 import { JoinCTA } from '../components/JoinCTA';
 
 export function AppPage() {
@@ -29,6 +30,7 @@ export function AppPage() {
       <Stats />
       <Mission />
       <Features />
+      <Conviction />
       <JoinCTA />
     </div>
   );
