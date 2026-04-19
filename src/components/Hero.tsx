@@ -4,9 +4,9 @@ import { PhoneMockup } from './PhoneMockup';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-32 pb-24 bg-gradient-to-b from-neutral-50 to-white">
-      <div className="container mx-auto px-6 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-28 md:pt-32 pb-16 md:pb-24 bg-gradient-to-b from-neutral-50 to-white">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center max-w-6xl mx-auto">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl md:text-6xl lg:text-7xl font-display font-semibold text-neutral-900 leading-[1.05] tracking-tight mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-semibold text-neutral-900 leading-[1.05] tracking-tight mb-6"
             >
               La <span className="text-emerald-600">végétalisation</span>
               <br className="hidden md:block" />
@@ -31,7 +31,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-lg md:text-xl text-neutral-600 mb-10 max-w-xl leading-relaxed"
+              className="text-base md:text-xl text-neutral-600 mb-8 md:mb-10 max-w-xl leading-relaxed"
             >
               Construisons ensemble les villes de demain.
               <span className="block text-neutral-900 font-medium mt-1">Plus vertes, plus solidaires, plus humaines.</span>
@@ -55,12 +55,12 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex justify-center lg:justify-end mt-16 lg:mt-0"
+            className="relative flex justify-center lg:justify-end mt-10 lg:mt-0"
           >
             <PhoneMockup
               src="/images/hero-app.PNG"
               alt="Aperçu de l'application Ma Ville Verte et Moi"
-              className="w-[280px] sm:w-[320px] lg:w-[360px]"
+              className="w-[240px] sm:w-[300px] lg:w-[360px]"
             />
           </motion.div>
         </div>

@@ -80,7 +80,7 @@ export const Stats = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-white">
+    <section className="py-20 md:py-32 px-4 md:px-6 bg-white">
       <div className="container mx-auto max-w-6xl">
         {/* Section header */}
         <motion.div
@@ -88,18 +88,18 @@ export const Stats = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-20 max-w-3xl mx-auto"
+          className="text-center mb-14 md:mb-20 max-w-3xl mx-auto"
         >
           <p className="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-4">
             Un constat alarmant
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-neutral-900 leading-[1.1] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-neutral-900 leading-[1.1] tracking-tight">
             Pourquoi agir <span className="text-emerald-600">maintenant</span> ?
           </h2>
         </motion.div>
 
         {/* Stats grid */}
-        <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={ref} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -107,16 +107,16 @@ export const Stats = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white border border-neutral-200 rounded-2xl p-7 h-full"
+              className="bg-white border border-neutral-200 rounded-2xl p-5 md:p-7 h-full"
             >
               {/* Icon */}
-              <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 mb-8">
+              <div className="inline-flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-xl bg-emerald-50 text-emerald-600 mb-4 md:mb-8">
                 <stat.icon className="w-5 h-5" strokeWidth={2} />
               </div>
 
               {/* Value */}
-              <div className="mb-3">
-                <span className="text-5xl font-display font-semibold text-neutral-900 tracking-tight">
+              <div className="mb-2 md:mb-3">
+                <span className="text-4xl md:text-5xl font-display font-semibold text-neutral-900 tracking-tight">
                   <AnimatedNumber
                     value={stat.value}
                     prefix={stat.prefix}
@@ -127,10 +127,10 @@ export const Stats = () => {
               </div>
 
               {/* Label */}
-              <p className="text-neutral-600 text-base leading-snug">
+              <p className="text-neutral-600 text-sm md:text-base leading-snug">
                 {stat.label}
                 {stat.source && (
-                  <span className="text-neutral-400 text-sm ml-1">({stat.source})</span>
+                  <span className="text-neutral-400 text-xs md:text-sm ml-1">({stat.source})</span>
                 )}
               </p>
             </motion.div>

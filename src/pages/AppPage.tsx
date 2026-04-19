@@ -11,11 +11,11 @@ import { JoinCTA } from '../components/JoinCTA';
 export function AppPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Back button - fixed */}
+      {/* Back button - fixed (desktop only, mobile uses logo) */}
       <motion.div
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
-        className="fixed top-24 left-6 z-40"
+        className="hidden md:block fixed top-24 left-6 z-40"
       >
         <Link
           to="/"

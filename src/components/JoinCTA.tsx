@@ -41,7 +41,7 @@ export const JoinCTA = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-neutral-950">
+    <section className="py-20 md:py-32 px-4 md:px-6 bg-neutral-950">
       <div className="container mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,12 +57,12 @@ export const JoinCTA = () => {
           </div>
 
           {/* Title */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-white mb-6 leading-[1.1] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-white mb-6 leading-[1.1] tracking-tight">
             Prêt à végétaliser <span className="text-emerald-400">votre ville</span> ?
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-neutral-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-xl text-neutral-400 mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed">
             Téléchargez l'application et rejoignez une communauté engagée pour un environnement urbain plus vert et plus durable.
           </p>
 

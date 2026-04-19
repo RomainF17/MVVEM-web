@@ -90,7 +90,7 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[0]; index: n
   return (
     <div
       ref={ref}
-      className={`relative grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${isEven ? '' : 'lg:grid-flow-dense'} py-12 md:py-20`}
+      className={`relative grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center ${isEven ? '' : 'lg:grid-flow-dense'} py-8 md:py-20`}
     >
       {/* Content */}
       <motion.div
@@ -111,14 +111,14 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[0]; index: n
         </p>
 
         {/* Subtitle (H3) */}
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-neutral-900 leading-[1.15] tracking-tight">
+        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-neutral-900 leading-[1.15] tracking-tight">
           {feature.subtitle}
         </h3>
 
         {/* Paragraphs */}
         <div className="space-y-4 pt-2">
           {feature.description.map((p, idx) => (
-            <p key={idx} className="text-lg text-neutral-600 leading-relaxed">
+            <p key={idx} className="text-base md:text-lg text-neutral-600 leading-relaxed">
               {p}
             </p>
           ))}
@@ -168,7 +168,7 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[0]; index: n
 
 export const Features = () => {
   return (
-    <section id="features" className="py-24 md:py-32 px-6 bg-white">
+    <section id="features" className="py-20 md:py-32 px-4 md:px-6 bg-white">
       <div className="container mx-auto max-w-6xl">
         {/* Section header */}
         <motion.div
@@ -176,15 +176,15 @@ export const Features = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-20 max-w-3xl mx-auto"
+          className="text-center mb-14 md:mb-20 max-w-3xl mx-auto"
         >
           <p className="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-4">
             L'Application
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-neutral-900 mb-6 leading-[1.1] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-neutral-900 mb-6 leading-[1.1] tracking-tight">
             Des fonctionnalités pour <span className="text-emerald-600">agir ensemble</span>
           </h2>
-          <p className="text-lg md:text-xl text-neutral-600 leading-relaxed">
+          <p className="text-base md:text-xl text-neutral-600 leading-relaxed">
             Découvrez tous les outils à votre disposition pour participer activement à la transition écologique de votre ville et au quotidien.
           </p>
         </motion.div>
