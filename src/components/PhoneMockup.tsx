@@ -6,16 +6,16 @@ type PhoneMockupProps = {
 };
 
 /**
- * Mockup iPhone (coque verte + bezel + Dynamic Island) avec ratio d'écran
+ * Mockup iPhone (coque titane + bezel + Dynamic Island) avec ratio d'écran
  * proche iPhone (9:19.5). Conçu pour afficher des screenshots iOS sans bandes.
  */
 export function PhoneMockup({ src, alt, className }: PhoneMockupProps) {
   return (
     <div className={["relative max-w-full", className ?? ""].join(" ").trim()}>
-      {/* Outer green case */}
-      <div className="relative rounded-[3.25rem] bg-gradient-to-b from-emerald-950 to-emerald-800 p-[10px] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.55)]">
+      {/* Outer titanium case */}
+      <div className="relative rounded-[3.25rem] bg-gradient-to-b from-neutral-700 via-neutral-900 to-black p-[10px] shadow-[0_30px_60px_-25px_rgba(0,0,0,0.4)]">
         {/* Subtle highlight */}
-        <div className="pointer-events-none absolute inset-0 rounded-[3.25rem] bg-gradient-to-b from-white/10 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 rounded-[3.25rem] bg-gradient-to-b from-white/15 to-transparent" />
 
         {/* Bezel */}
         <div className="rounded-[2.85rem] bg-transparent">
@@ -40,4 +40,3 @@ export function PhoneMockup({ src, alt, className }: PhoneMockupProps) {
     </div>
   );
 }
-

@@ -9,26 +9,26 @@ import { JoinCTA } from '../components/JoinCTA';
 
 export function AppPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Back button - fixed */}
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
+        initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         className="fixed top-24 left-6 z-40"
       >
         <Link
           to="/"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg text-gray-600 hover:text-emerald-600 transition-colors font-medium border border-gray-100"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full text-neutral-600 hover:text-neutral-900 transition-colors font-medium border border-neutral-200"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-4 h-4" />
           Accueil
         </Link>
       </motion.div>
 
       <Hero />
-      <Features />
-      <Mission />
       <Stats />
+      <Mission />
+      <Features />
       <JoinCTA />
     </div>
   );
