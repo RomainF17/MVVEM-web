@@ -3,8 +3,8 @@ import { ArrowRight } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-28 md:pt-32 pb-16 md:pb-24 bg-white">
-      {/* Background image with integrated phone mockup (desktop) */}
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-28 md:pt-32 pb-16 md:pb-24 bg-gradient-to-b from-neutral-50 to-white">
+      {/* Desktop background image with integrated phone mockup */}
       <div
         className="hidden md:block absolute inset-0 bg-no-repeat bg-right bg-contain pointer-events-none"
         style={{ backgroundImage: 'url(/images/backgroundhero.png)' }}
@@ -13,14 +13,12 @@ export const Hero = () => {
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 w-full">
         <div className="max-w-6xl mx-auto">
-          {/* Text Content - left aligned */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-start text-left max-w-xl lg:max-w-2xl"
           >
-            {/* Main headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -32,7 +30,6 @@ export const Hero = () => {
               {' '}à portée de main
             </motion.h1>
 
-            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -43,7 +40,6 @@ export const Hero = () => {
               <span className="block text-neutral-900 font-medium mt-1">Plus vertes, plus solidaires, plus humaines.</span>
             </motion.p>
 
-            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -54,15 +50,23 @@ export const Hero = () => {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
               </button>
             </motion.div>
+          </motion.div>
 
-            {/* Mobile image with integrated phone mockup */}
-            <motion.img
-              src="/images/backgroundhero.png"
+          {/* Mobile mockup — clean centered presentation */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden relative mt-14 flex justify-center"
+          >
+            <div
+              className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[80%] mx-auto max-w-[280px] rounded-full bg-emerald-200/40 blur-3xl pointer-events-none"
+              aria-hidden
+            />
+            <img
+              src="/images/mokcupmobile.png"
               alt="Aperçu de l'application Ma Ville Verte et Moi"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="md:hidden mt-10 w-full h-auto"
+              className="relative w-[260px] sm:w-[300px] h-auto drop-shadow-[0_30px_40px_rgba(0,0,0,0.15)]"
             />
           </motion.div>
         </div>
