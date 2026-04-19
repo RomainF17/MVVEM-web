@@ -1,74 +1,79 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Map, Newspaper, Sprout, Flower2, Check } from 'lucide-react';
+import { Map, Newspaper, Sprout, Flower2, Check, Sparkles } from 'lucide-react';
 import { PhoneMockup } from './PhoneMockup';
 import { useRef } from 'react';
 
 const features = [
   {
-    id: "informer",
-    title: "Informer",
-    subtitle: "Restez connecté à l'actualité verte",
-    description: [
-      "La page Infos permet d'informer l'utilisateur de l'actualité verte de sa commune et de le sensibiliser à la nature et au respect des pratiques de développement durable.",
-      "Un fil d'actualité affiche l'initiative et l'actualité se déroulant près de chez vous.",
-    ],
-    icon: Newspaper,
-    points: [
-      "Fil d'actualité près de chez vous",
-      "Dossiers & thématiques",
-      "Dispositifs & réglementations",
-      "Astuces & aménagements responsables",
-    ],
-    image: "/images/feature-informer.PNG"
-  },
-  {
     id: "echanger",
     title: "Échanger & proposer",
     subtitle: "Créez et partagez vos initiatives",
     description: [
-      "Chaque membre de la communauté pourra créer et proposer une initiative verte qui pourra se dérouler dans sa ville à un temps donné.",
+      "Chaque membre de la communauté pourra créer et proposer une initiative verte qui pourra se dérouler dans sa ville à un temps donné. Une initiative permet aussi bien de partager des connaissances que de s'organiser avec les gens de son quartier : la forme reste libre, place aux propositions.",
       "Celle-ci pourra être vue par tous les utilisateurs de l'application qui pourront faire le choix d'y participer, de la suivre et/ou de la partager.",
     ],
     icon: Sprout,
     points: [
-      "Créer une initiative verte",
-      "Participer, suivre, partager",
-      "Rencontrer & fédérer les voisins",
+      { label: "Créer une initiative verte" },
+      { label: "Participer, suivre, partager" },
+      { label: "Rencontrer & fédérer les voisins" },
     ],
     image: "/images/feature-echanger.PNG"
-  },
-  {
-    id: "carte",
-    title: "Géolocalisation",
-    subtitle: "Explorez les actions autour de vous",
-    description: [
-      "Sur la carte sont répertoriés : les initiatives de végétalisation, les ateliers de sensibilisation à la nature, les parcs et jardins, les jardineries et fleuristes.",
-      "Ainsi que tous les acteurs et dispositifs verts (fermes pédagogiques, jardins partagés, producteurs locaux biologiques, …).",
-    ],
-    icon: Map,
-    points: [
-      "Carte interactive",
-      "Initiatives, ateliers, parcs & jardins",
-      "Acteurs & dispositifs verts",
-    ],
-    image: "/images/feature-carte.png"
   },
   {
     id: "mes-plantes",
     title: "Mes Plantes",
     subtitle: "Prenez soin de vos plantes",
     description: [
-      "L'onglet Mes Plantes vous permet d'enregistrer toutes vos plantes et de maîtriser leur arrosage grâce à des rappels personnalisés.",
-      "Accédez à des fiches détaillées sur chaque espèce et identifiez vos plantes simplement en prenant une photo.",
+      "L'onglet Mes Plantes vous accompagne au quotidien : enregistrez vos plantes, recevez des rappels d'arrosage personnalisés et consultez des fiches détaillées sur chaque espèce.",
+      "Grâce à l'intelligence artificielle, identifiez vos plantes en prenant une photo et diagnostiquez les éventuels problèmes de santé pour savoir comment réagir.",
+      "Partagez vos plantes avec vos amis et suivez ensemble leur évolution : qui les a arrosées, leur croissance, leurs petits soins du quotidien.",
     ],
     icon: Flower2,
     points: [
-      "Enregistrer et gérer ses plantes",
-      "Rappels d'arrosage personnalisés",
-      "Fiches d'informations détaillées",
-      "Reconnaissance d'espèces par photo",
+      { label: "Enregistrer et gérer ses plantes" },
+      { label: "Rappels d'arrosage personnalisés" },
+      { label: "Fiches d'informations détaillées" },
+      { label: "Reconnaissance d'espèces par photo", ai: true },
+      { label: "Diagnostic de la plante", ai: true },
+      { label: "Partage entre amis & suivi collaboratif" },
     ],
     image: "/images/mes-plantes.PNG"
+  },
+  {
+    id: "informer",
+    title: "Informer",
+    subtitle: "Restez connecté à l'actualité verte",
+    description: [
+      "La page Infos permet d'informer l'utilisateur de l'actualité verte de sa commune et de le sensibiliser à la nature et au respect des pratiques de développement durable.",
+      "Un fil d'actualité affiche l'initiative et l'actualité se déroulant près de chez vous, avec des recommandations personnalisées et une boutique pour vous équiper.",
+    ],
+    icon: Newspaper,
+    points: [
+      { label: "Fil d'actualité près de chez vous" },
+      { label: "Dossiers & thématiques" },
+      { label: "Dispositifs & réglementations" },
+      { label: "Astuces & aménagements responsables" },
+      { label: "Recommandations personnalisées" },
+      { label: "Boutique d'articles verts" },
+    ],
+    image: "/images/feature-informer.PNG"
+  },
+  {
+    id: "carte",
+    title: "Géolocalisation",
+    subtitle: "Explorez les actions autour de vous",
+    description: [
+      "Sur la carte sont répertoriés : les initiatives de végétalisation, les espaces verts, les parcs et jardins, et les jardineries.",
+      "Ainsi que tous les acteurs et dispositifs verts (fermes pédagogiques, jardins partagés, producteurs locaux biologiques, …).",
+    ],
+    icon: Map,
+    points: [
+      { label: "Carte interactive" },
+      { label: "Initiatives, ateliers, parcs & jardins" },
+      { label: "Acteurs & dispositifs verts" },
+    ],
+    image: "/images/feature-carte.png"
   }
 ];
 
@@ -127,7 +132,15 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[0]; index: n
               className="flex items-start gap-2.5 text-neutral-700"
             >
               <Check className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-              <span className="leading-snug">{point}</span>
+              <span className="leading-snug">
+                {point.label}
+                {point.ai && (
+                  <span className="ml-2 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-100 align-middle">
+                    <Sparkles className="w-2.5 h-2.5" strokeWidth={2.5} />
+                    IA
+                  </span>
+                )}
+              </span>
             </li>
           ))}
         </ul>
