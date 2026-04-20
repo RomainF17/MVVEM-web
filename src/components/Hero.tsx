@@ -57,12 +57,12 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden relative mt-4 flex justify-center"
+            className="md:hidden relative -mt-4 flex justify-center"
           >
             <img
               src="/images/mokcupmobile.png"
               alt="Aperçu de l'application Ma Ville Verte et Moi"
-              className="w-[360px] sm:w-[400px] h-auto mix-blend-multiply"
+              className="w-[420px] sm:w-[460px] h-auto mix-blend-multiply"
             />
           </motion.div>
         </div>
