@@ -44,38 +44,35 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-background font-sans">
       {/* Navigation */}
-      <motion.nav 
+      <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed w-full z-50 transition-all duration-500 ${
-          scrolled 
-            ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 border-b border-gray-100/50' 
+        className={`fixed w-full z-50 transition-colors duration-300 ${
+          scrolled
+            ? 'bg-white/90 backdrop-blur-md border-b border-neutral-200/60'
             : 'bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center h-20">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex justify-between items-center h-16 md:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <motion.div 
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/25"
-              >
-                <Leaf className="w-6 h-6" />
-              </motion.div>
+            <Link to="/" className="flex items-center gap-2.5 group">
+              <div className="w-9 h-9 md:w-10 md:h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white">
+                <Leaf className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2} />
+              </div>
               <div className="hidden sm:block">
-                <span className="font-display font-bold text-xl text-secondary tracking-tight">Ma Ville Verte</span>
+                <span className="font-display font-semibold text-lg text-neutral-900 tracking-tight">Ma Ville Verte</span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
-                <Link 
+                <Link
                   key={link.to}
-                  to={link.to} 
-                  className="relative flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-secondary/70 hover:text-secondary transition-colors rounded-full hover:bg-secondary/5"
+                  to={link.to}
+                  className="relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors rounded-full hover:bg-neutral-100"
                 >
                   <link.icon className="w-4 h-4" />
                   {link.label}
@@ -84,32 +81,31 @@ function AppContent() {
             </div>
 
             {/* CTA Button */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <a
                 href="/admin.html"
-                className="hidden sm:flex items-center gap-2 text-secondary/60 hover:text-secondary transition-colors"
+                className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 transition-colors"
                 title="Administration"
               >
-                <Settings className="w-5 h-5" />
+                <Settings className="w-4 h-4" />
               </a>
-              <motion.button 
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-primary to-emerald-500 text-white px-5 py-2.5 rounded-full font-bold text-sm hover:shadow-glow transition-all duration-300"
+              <button
+                className="hidden sm:inline-flex items-center gap-2 bg-neutral-900 text-white px-5 py-2.5 rounded-full font-medium text-sm hover:bg-neutral-800 transition-colors"
               >
                 <Download className="w-4 h-4" />
                 Télécharger
-              </motion.button>
+              </button>
 
               {/* Mobile menu button */}
-              <button 
+              <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2.5 rounded-xl bg-secondary/5 hover:bg-secondary/10 transition-colors"
+                className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 transition-colors"
+                aria-label="Menu"
               >
                 {mobileMenuOpen ? (
-                  <X className="w-5 h-5 text-secondary" />
+                  <X className="w-5 h-5 text-neutral-900" />
                 ) : (
-                  <Menu className="w-5 h-5 text-secondary" />
+                  <Menu className="w-5 h-5 text-neutral-900" />
                 )}
               </button>
             </div>
@@ -123,46 +119,34 @@ function AppContent() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100"
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden bg-white border-t border-neutral-200/60 overflow-hidden"
             >
-              <div className="container mx-auto px-6 py-6 space-y-2">
-                {navLinks.map((link, index) => (
-                  <motion.div
+              <div className="container mx-auto px-4 py-4 space-y-1">
+                {navLinks.map((link) => (
+                  <Link
                     key={link.to}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    to={link.to}
+                    className="flex items-center gap-3 px-4 py-3 text-neutral-700 hover:text-neutral-900 font-medium rounded-xl hover:bg-neutral-100 transition-colors"
                   >
-                    <Link
-                      to={link.to}
-                      className="flex items-center gap-3 px-4 py-3 text-secondary font-semibold rounded-xl hover:bg-primary/5 transition-colors"
-                    >
-                      <link.icon className="w-5 h-5" />
-                      {link.label}
-                    </Link>
-                  </motion.div>
+                    <link.icon className="w-5 h-5 text-neutral-500" />
+                    {link.label}
+                  </Link>
                 ))}
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-emerald-500 text-white px-6 py-4 rounded-xl font-bold hover:shadow-glow transition-all"
+                <button
+                  className="w-full mt-3 flex items-center justify-center gap-2 bg-neutral-900 text-white px-6 py-3.5 rounded-full font-medium hover:bg-neutral-800 transition-colors"
                 >
-                  <Download className="w-5 h-5" />
+                  <Download className="w-4 h-4" />
                   Télécharger l'application
-                </motion.button>
-                <motion.a
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                </button>
+                <a
                   href="/admin.html"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full mt-2 flex items-center justify-center gap-2 border border-gray-300 text-secondary px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-all"
+                  className="w-full flex items-center justify-center gap-2 border border-neutral-200 text-neutral-700 px-6 py-3 rounded-full font-medium hover:bg-neutral-50 transition-colors"
                 >
-                  <Settings className="w-5 h-5" />
+                  <Settings className="w-4 h-4" />
                   Administration
-                </motion.a>
+                </a>
               </div>
             </motion.div>
           )}
