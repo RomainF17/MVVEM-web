@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
+import { TiltCard } from './TiltCard';
 
 export const Conviction = () => {
   return (
-    <section className="py-20 md:py-32 px-4 md:px-6 bg-white">
+    <section className="pt-8 md:pt-12 pb-20 md:pb-32 px-4 md:px-6 bg-white">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -10,7 +11,14 @@ export const Conviction = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative bg-neutral-950 rounded-3xl p-7 md:p-20 overflow-hidden">
+          <TiltCard
+            tiltLimit={5}
+            scale={1.02}
+            perspective={1400}
+            effect="evade"
+            spotlight
+            className="bg-neutral-950 rounded-3xl p-7 md:p-20"
+          >
             <div
               className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.10),transparent_60%)] pointer-events-none"
               aria-hidden
@@ -60,7 +68,7 @@ export const Conviction = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </TiltCard>
         </motion.div>
       </div>
     </section>

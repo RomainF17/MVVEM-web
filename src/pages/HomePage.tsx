@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { PhoneMockup } from '../components/PhoneMockup';
 import { Newspaper, ShoppingBag, Star, Smartphone, ArrowRight, Sprout, Map, Flower2 } from 'lucide-react';
 
 export function HomePage() {
@@ -138,19 +137,15 @@ export function HomePage() {
               </Link>
             </div>
             <div className="relative flex justify-center">
-              <motion.div
+              <motion.img
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="relative"
-              >
-                <PhoneMockup
-                  src="/images/hero-app.PNG"
-                  alt="Aperçu de l'application Ma Ville Verte"
-                  className="w-[240px] sm:w-[280px] lg:w-[320px]"
-                />
-              </motion.div>
+                src="/images/mokcupmobile.png"
+                alt="Aperçu de l'application Ma Ville Verte"
+                className="w-[380px] sm:w-[460px] lg:w-[560px] h-auto mix-blend-multiply"
+              />
             </div>
           </motion.div>
         </div>
