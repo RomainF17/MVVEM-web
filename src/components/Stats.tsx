@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { TreePine, Wind, ThermometerSun, Users } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
+import { AnimatedHeadline } from './AnimatedHeadline';
 
 const stats = [
   {
@@ -93,9 +94,15 @@ export const Stats = () => {
           <p className="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-4">
             Un constat alarmant
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-neutral-900 leading-[1.1] tracking-tight">
-            Pourquoi agir <span className="text-emerald-600">maintenant</span> ?
-          </h2>
+          <AnimatedHeadline
+            as="h2"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-neutral-900 leading-[1.1] tracking-tight"
+            segments={[
+              { text: 'Pourquoi agir' },
+              { text: 'maintenant', className: 'text-emerald-600' },
+              { text: '?' },
+            ]}
+          />
         </motion.div>
 
         {/* Stats grid */}

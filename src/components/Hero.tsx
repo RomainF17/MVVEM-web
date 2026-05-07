@@ -1,40 +1,37 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { AnimatedHeadline } from './AnimatedHeadline';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-28 md:pt-32 pb-16 md:pb-24 bg-gradient-to-b from-neutral-50 to-white">
-      {/* Desktop background image with integrated phone mockup */}
-      <div
-        className="hidden md:block absolute inset-0 bg-no-repeat bg-right bg-contain pointer-events-none"
-        style={{ backgroundImage: 'url(/images/backgroundhero.png)' }}
-        aria-hidden
-      />
-
+    <section className="relative overflow-hidden pt-16 md:pt-20 pb-10 md:pb-16 bg-white">
       <div className="container mx-auto px-4 md:px-6 relative z-10 w-full">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1fr_1.25fr] gap-8 md:gap-10 lg:gap-12 items-center">
+          {/* Left column — text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-start text-left max-w-xl lg:max-w-2xl"
+            className="flex flex-col items-start text-left"
           >
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-semibold text-neutral-900 leading-[1.05] tracking-tight mb-6"
-            >
-              La <span className="text-emerald-600">végétalisation</span>
-              <br className="hidden md:block" />
-              {' '}à portée de main
-            </motion.h1>
+            <AnimatedHeadline
+              as="h1"
+              trigger="mount"
+              delay={0.3}
+              className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-display font-semibold text-neutral-900 leading-[1.05] tracking-tight mb-6"
+              segments={[
+                { text: 'La' },
+                { text: 'végétalisation', className: 'text-emerald-600' },
+                { lineBreak: true, breakpoint: 'md' },
+                { text: 'à portée de main' },
+              ]}
+            />
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base md:text-xl text-neutral-600 mb-8 md:mb-10 max-w-xl leading-relaxed"
+              className="text-base md:text-lg lg:text-xl text-neutral-600 mb-8 md:mb-10 max-w-xl leading-relaxed"
             >
               Construisons ensemble les villes de demain.
               <span className="block text-neutral-900 font-medium mt-1">Plus vertes, plus solidaires, plus humaines.</span>
@@ -52,17 +49,17 @@ export const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Mobile mockup — clean centered presentation */}
+          {/* Right column — mockup (centered on mobile, right-aligned on desktop) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden relative -mt-4 flex justify-center"
+            className="relative flex justify-center md:justify-end -mt-2 md:mt-0"
           >
             <img
               src="/images/mokcupmobile.png"
               alt="Aperçu de l'application Ma Ville Verte et Moi"
-              className="w-[420px] sm:w-[460px] h-auto mix-blend-multiply"
+              className="w-[480px] sm:w-[540px] md:w-[540px] lg:w-[680px] h-auto mix-blend-multiply max-w-full"
             />
           </motion.div>
         </div>
